@@ -2,17 +2,19 @@ package Message;
 
 import java.util.Collection;
 
-import it.istc.pst.platinum.executive.dc.DCResult;
-import it.istc.pst.platinum.executive.dc.DispatchDCResult;
-
 public class DispatchMessage extends Message{
 	public Collection<String> tokens;
 	
 	public DispatchMessage(String message, Collection<String> tokens){
 		super(message); 
+		this.type = MessageType.DISPATCH;
 		this.tokens = tokens; 
 	}
 
+	public Collection<String> getTokens(){
+		return this.tokens; 
+	}
+	
 	@Override
 	public String toString() {
 		String a = this.message; 
@@ -21,5 +23,9 @@ public class DispatchMessage extends Message{
 		}
 		
 		return a; 
+	}
+	
+	public String typeToString(){
+		return "DISPATCH"; 
 	}
 }

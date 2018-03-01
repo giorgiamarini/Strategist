@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import it.istc.pst.platinum.executive.dc.PlanExecutionStatus;
+
 /*State is a map where the keys are the state variables and the value is the value of the state variables in that moment.*/
 public class StateVariables {
 	private Map<String, String> stateVariablesValues; 
@@ -71,6 +73,13 @@ public class StateVariables {
 			}
 		}
 		return complete;
+	}
+
+	public void uncontrollableJump(PlanExecutionStatus status) {
+		for (String s : status.getStatus().keySet()){
+			this.stateVariablesValues.put(s, status.getStatus().get(s));
+		}
+		
 	}
 	
 }

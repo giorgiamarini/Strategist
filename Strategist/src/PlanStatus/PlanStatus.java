@@ -46,7 +46,7 @@ public class PlanStatus {
 			transition(condition, action);
 
 			Map<String, String> tokensToDispatch = new HashMap<String,String>(); 
-			tokensToDispatch = action.getFinalStates();
+			tokensToDispatch = action.getInitialStates();
 			for (String a : tokensToDispatch.keySet()){
 				if (tokensToDispatch.get(a).isEmpty())
 					tokensToDispatch.remove(a);

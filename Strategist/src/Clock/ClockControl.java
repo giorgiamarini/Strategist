@@ -55,4 +55,24 @@ public class ClockControl {
 	public Set<Clock> getClocks(){
 		return this.clocks; 
 	}
+	
+	public void addToClocks(long u){
+		for(Clock c : this.clocks){
+			c.setTime(c.getTime()+u);
+		}
+	}
+	
+	public void subtractToClocks(long u){
+		for(Clock c : this.clocks){
+			c.setTime(c.getTime()-u);
+		}
+	}
+
+	public void uncontrollableJump(long newTime) {
+		if (this.getPlanClock().getTime() < newTime) 
+			addToClocks(newTime-this.getPlanClock().getTime());
+		else subtractToClocks(newTime-this.getPlanClock().getTime());
+			
+		
+	}
 }

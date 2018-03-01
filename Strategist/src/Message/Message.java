@@ -1,6 +1,7 @@
 package Message;
 
 public abstract class Message {
+	public MessageType type; 
 	public String message; 
 	
 	public Message(String message){
@@ -9,5 +10,10 @@ public abstract class Message {
 	
 	@Override
 	public abstract String toString(); 
+	public abstract String typeToString(); 
+	
+	public MessageType getType(){
+		return this.type;
+	}
 	
 }
