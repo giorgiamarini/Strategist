@@ -9,6 +9,11 @@ public class Clock {
 		this.tick = 0;
 	}
 	
+	public Clock (String clockName, int tick){
+		this.clockName = clockName; 
+		this.tick = tick; 
+	}
+	
 	public String getClockName(){
 		return this.clockName; 
 	}

@@ -14,26 +14,28 @@ import StateVariables.StateVariables;
 import ThingsThatMustBeVerified.Condition;
 
 public class PlanStatus {
-	private StateVariables state; 
+	private StateVariables stateVariablesValue; 
 	private ClockControl clocks; 
 	private Message message; 
 
 	public PlanStatus(ClockControl clocks, Set<String> sv){
 		this.clocks = clocks; 
-		this.state = new StateVariables();
-		this.state.initialize(sv);
+		this.stateVariablesValue = new StateVariables();
+		this.stateVariablesValue.initialize(sv);
 		this.message = null; 
 
 	}
-	
-	public void increaseClocks(){
+
+	public long increaseClocks(){
 		this.clocks.increaseClocks();
+		
+		return this.clocks.getPlanClock().getTime();
 	}
-	
+
 	/*This method does the transition, given a condition and an action.*/
 	private void transition(Condition condition, Action action) throws Exception{
 		if (condition.isVerified(this.clocks)){
-			action.takeTransition(this.state, this.clocks);	 
+			action.takeTransition(this.stateVariablesValue, this.clocks);	 
 			this.clocks.setNewValues(action.getNewValues());
 		}
 	}
@@ -61,15 +63,15 @@ public class PlanStatus {
 		}
 		this.message = new FailureMessage("Warning, an error is occurred.");
 	}
-	
-	public StateVariables getState(){
-		return this.state; 
+
+	public StateVariables getStateVariablesValues(){
+		return this.stateVariablesValue; 
 	}
-	
+
 	public Message getMessage(){
 		return this.message; 
 	}
-	
+
 	public ClockControl getClocks(){
 		return this.clocks; 
 	}

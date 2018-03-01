@@ -9,7 +9,6 @@ import java.util.Scanner;
 import java.util.Set;
 
 import Action.Action;
-import Clock.ClockControl;
 import PlanStatus.PlanStatus;
 import Relations.Relations;
 import StateVariables.StateVariables;
@@ -163,7 +162,7 @@ public class Strategy {
 		
 		while ((strLine = br.readLine())!= null) {
 			line++; 
-			if (strLine.startsWith("State") && istant.getState().isState(strLine)){
+			if (strLine.startsWith("State") && istant.getStateVariablesValues().isState(strLine)){
 				istant.evaluateCondition(new Condition(getConditionFromLine(line+1)), 
 						new Action(getActionFromLine(line+1), getGuardsFromLine(line+1)));
 				
@@ -223,7 +222,8 @@ public class Strategy {
 		String condition = ""; 
 		String line = sf.lineAtNumber(this.strategy, i); 
 
-		while (!(sf.lineAtNumber(this.strategy, i).startsWith("When")) || !(sf.lineAtNumber(this.strategy, i).startsWith("While"))) {
+		while (!(sf.lineAtNumber(this.strategy, i).startsWith("When")) || 
+				!(sf.lineAtNumber(this.strategy, i).startsWith("While"))) {
 			i++; 
 			line = sf.lineAtNumber(this.strategy, i);
 		} 

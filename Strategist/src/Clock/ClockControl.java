@@ -43,6 +43,15 @@ public class ClockControl {
 		}
 	}
 
+	public Clock getPlanClock(){
+		Clock c = null; 
+		for (Clock a : this.clocks)
+			if (a.getClockName().equals("plan_clock")){
+				c = a; 
+			}
+		return c; 
+	}
+	
 	public Set<Clock> getClocks(){
 		return this.clocks; 
 	}

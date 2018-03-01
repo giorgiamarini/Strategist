@@ -58,7 +58,7 @@ public class Action {
 	/*This method change the value of the state variable value in the state.*/
 	public void takeTransition(StateVariables state, ClockControl clock) {
 		if (this.guards.isVerified(clock))
-			for(String actualState : state.getState().keySet())
+			for(String actualState : state.getStateVariables().keySet())
 				if (actualState == this.initialStates.get(actualState))
 					state.insertStateVariableValue(actualState, this.finalStates.get(actualState));
 					

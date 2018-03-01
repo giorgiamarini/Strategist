@@ -46,7 +46,7 @@ public class CreatingTheStrategy {
 	}
 
 	/*The method controls the extension of the input file.*/
-	private static boolean okExtension(String filePath, String ok){
+	private boolean okExtension(String filePath, String ok){
 		return filePath.substring(filePath.lastIndexOf('.')).equals(ok);  //we need an .xta file
 	}
 	

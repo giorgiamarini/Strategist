@@ -12,6 +12,10 @@ public class StateVariables {
 		this.stateVariablesValues = new HashMap<String, String>();
 	}
 
+	public StateVariables(Map<String, String> state){
+		this.stateVariablesValues = state; 
+	}
+	
 	/*The method initialize sets all the values of the state variables in the state to 'start'.*/
 	public void initialize(Set<String> sv){
 		for(String stateVariable : sv){
@@ -43,8 +47,8 @@ public class StateVariables {
 		boolean isEqual = false; 
 		
 		for (String key : this.stateVariablesValues.keySet()){
-			for (String yek : state.getState().keySet()){
-				isEqual = isEqual && this.stateVariablesValues.get(key).equals(state.getState().get(yek));
+			for (String yek : state.getStateVariables().keySet()){
+				isEqual = isEqual && this.stateVariablesValues.get(key).equals(state.getStateVariables().get(yek));
 			}
 		} return isEqual; 
 	}
@@ -55,8 +59,18 @@ public class StateVariables {
 		}
 	
 	
-	public Map<String, String> getState(){
+	public Map<String, String> getStateVariables(){
 		return this.stateVariablesValues; 
+	}
+
+	public boolean isFinalStatus() {
+		boolean complete = true;
+		for (String s : this.stateVariablesValues.keySet()){
+			if (complete){
+				complete = this.stateVariablesValues.get(s).equals("finish"); 
+			}
+		}
+		return complete;
 	}
 	
 }
