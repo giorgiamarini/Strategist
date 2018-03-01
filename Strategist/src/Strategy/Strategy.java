@@ -10,9 +10,9 @@ import java.util.Set;
 
 import Action.Action;
 import Clock.ClockControl;
-import Istant.Istant;
+import PlanStatus.PlanStatus;
 import Relations.Relations;
-import State.State;
+import StateVariables.StateVariables;
 import StringFinder.StringFinder;
 import ThingsThatMustBeVerified.Condition;
 
@@ -46,7 +46,7 @@ public class Strategy {
 	}
 	
 	
-	public Condition newConditionReleatedToState(State state, Condition condition) throws FileNotFoundException{
+	public Condition newConditionReleatedToState(StateVariables state, Condition condition) throws FileNotFoundException{
 		StringFinder sf = new StringFinder(); 
 		int lineNumber = findState(state);
 		String line = sf.lineAtNumber(this.strategy, lineNumber);
@@ -92,7 +92,7 @@ public class Strategy {
 	}
 
 	/*The method finds the state in the document and returns the line of the document containing the state.*/
-	public int findState(State state) throws FileNotFoundException{
+	public int findState(StateVariables state) throws FileNotFoundException{
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(this.strategy); 
 		String line = "";
@@ -124,7 +124,7 @@ public class Strategy {
 		return state.substring(state.indexOf("("+1),state.indexOf(")")).trim(); 
 	}
 
-	public String nextState(State state) throws FileNotFoundException{
+	public String nextState(StateVariables state) throws FileNotFoundException{
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(this.strategy);
 		String line = ""; 
@@ -156,7 +156,7 @@ public class Strategy {
 		return sf.isThere(this.strategy, "Strategy to win");
 	}
 
-	public Istant goOn(Istant istant) throws Exception {
+	public PlanStatus goOn(PlanStatus istant) throws Exception {
 		BufferedReader br = new BufferedReader(new FileReader(this.strategy)); 
 		String strLine;
 		int line = 0; 

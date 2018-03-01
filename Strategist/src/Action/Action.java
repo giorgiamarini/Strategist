@@ -6,7 +6,7 @@ import java.util.Map;
 
 import Clock.ClockControl;
 import Clock.NewValues;
-import State.State;
+import StateVariables.StateVariables;
 import ThingsThatMustBeVerified.Guards;
 
 public class Action {
@@ -56,7 +56,7 @@ public class Action {
 	}
 
 	/*This method change the value of the state variable value in the state.*/
-	public void takeTransition(State state, ClockControl clock) {
+	public void takeTransition(StateVariables state, ClockControl clock) {
 		if (this.guards.isVerified(clock))
 			for(String actualState : state.getState().keySet())
 				if (actualState == this.initialStates.get(actualState))

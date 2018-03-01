@@ -1,4 +1,4 @@
-package Istant;
+package PlanStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,21 +10,22 @@ import Message.DispatchMessage;
 import Message.FailureMessage;
 import Message.Message;
 import Message.WaitMessage;
-import State.State;
+import StateVariables.StateVariables;
 import ThingsThatMustBeVerified.Condition;
 
-public class Istant {
-	private State state; 
+public class PlanStatus {
+	private StateVariables state; 
 	private ClockControl clocks; 
 	private Message message; 
 
-	public Istant(ClockControl clocks, Set<String> sv){
+	public PlanStatus(ClockControl clocks, Set<String> sv){
 		this.clocks = clocks; 
-		this.state = new State();
+		this.state = new StateVariables();
 		this.state.initialize(sv);
 		this.message = null; 
 
 	}
+	
 	public void increaseClocks(){
 		this.clocks.increaseClocks();
 	}
@@ -61,7 +62,7 @@ public class Istant {
 		this.message = new FailureMessage("Warning, an error is occurred.");
 	}
 	
-	public State getState(){
+	public StateVariables getState(){
 		return this.state; 
 	}
 	

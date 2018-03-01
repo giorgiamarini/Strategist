@@ -6,7 +6,7 @@ import java.util.Set;
 
 import Clock.ClockControl;
 import CreatingTheStrategy.CreatingTheStrategy;
-import Istant.Istant;
+import PlanStatus.PlanStatus;
 import Strategy.Strategy;
 
 public class Main {
@@ -16,7 +16,7 @@ public class Main {
 		cts.creatingStrategy();
 
 		Strategy strategy = cts.getStrategy();
-		Istant istant = new Istant(new ClockControl(clocks(strategy), strategy.getHorizon()), strategy.stateVariables());
+		PlanStatus istant = new PlanStatus(new ClockControl(clocks(strategy), strategy.getHorizon()), strategy.stateVariables());
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		for(;;) 
@@ -29,8 +29,6 @@ public class Main {
 				if (scanner.hasNextLine()){
 					System.out.println(istant.getMessage().toString());
 				}
-				
-				
 			} catch (InterruptedException e) { 
 				e.printStackTrace(); 
 			} 
