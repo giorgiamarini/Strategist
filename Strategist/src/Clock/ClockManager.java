@@ -1,6 +1,9 @@
 package Clock;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import PlanStatus.PlanStatus;
 import Strategy.Strategy;
 
@@ -11,6 +14,15 @@ public final class ClockManager implements Runnable {
 	private long planClockTime; 
 	private Thread thread; 
 	
+	
+
+	public ClockManager(){
+		this.complete = false; 
+		ClockControl clocks = new ClockControl(clocks(), this.strategy.getHorizon());
+		this.istant = new PlanStatus(clocks, this.strategy.stateVariables()); 
+		start(0);
+	}
+	
 /*	public void main(String[] args) throws Exception{
 		CreatingTheStrategy cts = new CreatingTheStrategy();
 		cts.creatingStrategy();
@@ -19,17 +31,17 @@ public final class ClockManager implements Runnable {
 		this.istant = new PlanStatus(new ClockControl(clocks(strategy), strategy.getHorizon()), strategy.stateVariables());
 	
 	}
-
-	public static Set<String> clocks(Strategy strategy){
+*/
+	public Set<String> clocks(){
 		Set<String> clocks = new HashSet<String>(); 
 
-		clocks.addAll(strategy.stateVariables()); 
+		clocks.addAll(this.strategy.stateVariables()); 
 		clocks.add("plan_clock"); 
-		clocks.addAll(strategy.getRelations().getRelations());
+		clocks.addAll(this.strategy.getRelations().getRelations());
 		
 		return clocks; 
 	}
-*/
+
 	public synchronized void start(long planClockTime){
 		if (this.thread == null) {
 			this.planClockTime = planClockTime; 
