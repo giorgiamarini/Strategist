@@ -20,13 +20,15 @@ public class Strategy {
 	private int horizon; 
 	private Relations relations; 
 
-	public Strategy(File strategy, int horizon, Relations relations) throws FileNotFoundException{
+	public Strategy(File strategy, int horizon, Relations relations) throws Exception{
 		if (strategy.exists()){
 			this.strategy = strategy;
 			this.horizon = horizon; 
 			this.relations = relations; 
 		} else 
 			throw new FileNotFoundException();
+		
+		if (!isToWin()) throw new Exception(); 
 	}
 
 	@SuppressWarnings("null")
@@ -164,7 +166,7 @@ public class Strategy {
 		
 		while ((strLine = br.readLine())!= null) {
 			line++; 
-			if (strLine.startsWith("State") && istant.getStateVariablesValues().isState(strLine)){
+			if (strLine.startsWith("State") && istant.getStateVariablesValues().isState(getStateFromLine(line))){
 				istant.evaluateCondition(new Condition(getConditionFromLine(line+1)), 
 						new Action(getActionFromLine(line+1), getGuardsFromLine(line+1)));
 				
@@ -175,6 +177,21 @@ public class Strategy {
 		
 	}
 
+	private String getStateFromLine(int i) throws FileNotFoundException{
+		StringFinder sf = new StringFinder(); 
+		String state = ""; 
+		String line = sf.lineAtNumber(this.strategy, i); 
+		
+		do {
+			state.concat(line); 
+			line = sf.lineAtNumber(this.strategy, i); 
+			i++; 
+		} while (!line.contains("you are in")); 
+		
+		return state.substring(state.indexOf("(")+1, state.indexOf(")")).trim();
+	}
+	
+	
 	private String getGuardsFromLine(int i) throws FileNotFoundException{
 		StringFinder sf = new StringFinder(); 
 		String guards = ""; 
