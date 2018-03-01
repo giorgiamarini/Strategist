@@ -10,6 +10,12 @@ public class ClockControl {
 		for (String s : clocks){
 			this.clocks.add(new Clock(s));
 		}
+		for (Clock c: this.clocks){
+			if (!c.getClockName().contains("clock")){
+				c.setClockName(c.getClockName().concat("_clock"));
+			}
+		}
+		
 		this.horizon = horizon;
 	}
 
@@ -22,16 +28,18 @@ public class ClockControl {
 	/*The method, having new values that the clock must assume, change the current values of the clock,
 	 * reinitializing them if it is necessary.*/
 	public void setNewValues(NewValues values){
-		for (Clock c: this.clocks){
-			for (String v : values.getNewValues())
-				if (v.contains(c.getClockName())){
-					if (v.contains("H")){
-						c.setTime(horizon*2);
-					}
-					else 
-						c.setTime(Integer.parseInt(v.substring(v.indexOf("=")+1, v.indexOf(",")).trim()));
-				}
+		if (!(values == null)){
 
+			for (Clock c: this.clocks){
+				for (String v : values.getNewValues())
+					if (v.contains(c.getClockName())){
+						if (v.contains("H")){
+							c.setTime(horizon);
+						}
+						else 
+							c.setTime(Integer.parseInt(v.substring(v.indexOf("=")+1, v.indexOf(",")).trim()));
+					}
+			}
 		}
 	}
 

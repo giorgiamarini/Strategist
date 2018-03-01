@@ -13,6 +13,10 @@ public class Clock {
 		return this.clockName; 
 	}
 	
+	public void setClockName(String newName){
+		this.clockName = newName; 
+	}
+	
 	public long getTime(){
 		return this.tick; 
 	}
