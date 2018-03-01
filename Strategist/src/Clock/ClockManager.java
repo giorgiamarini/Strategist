@@ -1,6 +1,7 @@
 package Clock;
 
 
+import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -83,5 +84,13 @@ public final class ClockManager implements Runnable {
 
 	public void setPlanClockTime(long planClockTime){
 		this.newTime = planClockTime;
+	}
+
+	public boolean uncontrollable(PlanExecutionStatus status) throws FileNotFoundException {
+		this.setPlanClockTime(status.getTime());
+		this.istant.getClocks().uncontrollableJump(status.getTime());
+		this.istant.getStateVariablesValues().uncontrollableJump(status);
+		return this.strategy.canIMove(this.istant.getStateVariablesValues());
+		
 	}
 }

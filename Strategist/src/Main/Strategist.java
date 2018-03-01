@@ -14,4 +14,10 @@ public class Strategist {
 		return time.getIstant().getMessage();
 		
 	}
+
+
+	public static boolean notify(PlanExecutionStatus status) {
+		return time.uncontrollable(status);
+		
+	}
 }

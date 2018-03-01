@@ -144,9 +144,11 @@ public class Strategy {
 
 			}
 		}
+		
+		if (line!="")
+			line = line.substring(line.indexOf("("), line.indexOf(")")).trim(); 
 
-		return line.substring(line.indexOf("("), line.indexOf(")")).trim(); 
-
+		return line;
 	}
 
 	/*the method controls if the strategy is a strategy to win.*/
@@ -250,6 +252,10 @@ public class Strategy {
 	
 	public Relations getRelations(){
 		return this.relations; 
+	}
+
+	public boolean canIMove(StateVariables stateVariablesValues) throws FileNotFoundException {
+		return this.nextState(stateVariablesValues)!= ""; 
 	}
 
 }

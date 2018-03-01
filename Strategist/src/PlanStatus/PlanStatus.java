@@ -61,7 +61,7 @@ public class PlanStatus {
 				}
 			}
 		}
-		this.message = new FailureMessage("Warning, an error is occurred.");
+		this.message = new FailureMessage("Impasse!");
 	}
 
 	public StateVariables getStateVariablesValues(){
