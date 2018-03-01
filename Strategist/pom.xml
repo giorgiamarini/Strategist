@@ -18,6 +18,13 @@
       </plugin>
     </plugins>
   </build> 
+  <dependencies>
+  	<dependency>
+  		<groupId>epsl2</groupId>
+  		<artifactId>epsl2</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>
 
 
