@@ -18,8 +18,9 @@ public final class ClockManager implements Runnable {
 	private Thread thread; 
 
 
-	public ClockManager(){
+	public ClockManager(Strategy strategy){
 		this.complete = false; 
+		this.strategy = strategy; 
 		this.istant = new PlanStatus(new ClockControl(clocks(), this.strategy.getHorizon()), this.strategy.stateVariables()); 
 		start(0);
 	}

@@ -1,24 +1,14 @@
-package CreatingTheStrategy;
+package StrategyCreator;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
-import java.util.Scanner;
-
 import JavaRunCommand.JavaRunCommand;
 import Relations.Relations;
 import Strategy.Strategy;
 import StringFinder.StringFinder; 
 
-public class CreatingTheStrategy {
+public class StrategyCreator {
 	private Strategy strategy;  
-
-	public void creatingStrategy() throws Exception{
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-		String path = scanner.nextLine(); 
-		createStrategy(path);
-	}
-	
 	
 	/*this method create the file strategy if the input file has .xta extension.*/
 	public Strategy createStrategy(String fileName) throws Exception{
@@ -41,7 +31,7 @@ public class CreatingTheStrategy {
 /*The method verifytga call the instruction  verifytga on the terminal and save the output in a file.*/
 	private static File verifytga(String fileName) throws IOException, InterruptedException {
 		JavaRunCommand jav = new JavaRunCommand();
-		File output = jav.runCommandVTGA(fileName);
+		File output = jav.runCommandVTGA(fileName, new File("strategy.txt"));
 		return output; 
 	}
 
