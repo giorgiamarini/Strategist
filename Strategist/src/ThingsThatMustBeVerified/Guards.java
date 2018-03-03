@@ -10,10 +10,10 @@ public class Guards extends ThingsThatMustBeVerified {
 	}
 
 	public void putGuards(String guards){
-		guards = guards.substring(0, guards.indexOf("tau")-1);
+		guards = guards.substring(0, guards.indexOf(", tau")-1);
 		while(!guards.isEmpty()){
-			this.conditions.add(guards.substring(0, guards.indexOf("&&")).replace("&", "").trim());
-			guards = guards.substring(guards.indexOf("&&")).trim(); 
+			this.conditions.add(guards.substring(0, guards.indexOf("&&")).replace("&&", "").trim());
+			guards = guards.substring(guards.indexOf("&&")+2).trim(); 
 		}
 	}
 	

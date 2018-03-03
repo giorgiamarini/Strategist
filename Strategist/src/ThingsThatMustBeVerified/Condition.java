@@ -5,7 +5,7 @@ import java.util.Set;
 
 /*Condition must be verified to take the transition.*/
 public class Condition extends ThingsThatMustBeVerified{
-	
+		String type; 
 	public Condition(String condition){
 		super(condition); 
 		setOfConditions(); 

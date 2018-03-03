@@ -3,7 +3,6 @@
   <groupId>Strategist</groupId>
   <artifactId>Strategist</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
@@ -20,8 +19,8 @@
   </build> 
   <dependencies>
   	<dependency>
-  		<groupId>epsl2</groupId>
-  		<artifactId>epsl2</artifactId>
+  		<groupId>it.cnr.istc.pst</groupId>
+  		<artifactId>platinum</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>

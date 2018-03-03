@@ -63,7 +63,6 @@ public final class ClockManager implements Runnable {
 			catch (InterruptedException e) { 
 				e.printStackTrace(); 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
 

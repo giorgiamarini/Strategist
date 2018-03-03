@@ -160,21 +160,29 @@ public class Strategy {
 	}
 
 	public PlanStatus goOn(PlanStatus istant) throws Exception {
-		BufferedReader br = new BufferedReader(new FileReader(this.strategy)); 
+		BufferedReader br = new BufferedReader(new FileReader(this.strategy));
 		String strLine;
 		int line = 0; 
-		
+
 		while ((strLine = br.readLine())!= null) {
 			line++; 
 			if (strLine.startsWith("State") && istant.getStateVariablesValues().isState(getStateFromLine(line))){
-				istant.evaluateCondition(new Condition(getConditionFromLine(line+1)), 
-						new Action(getActionFromLine(line+1), getGuardsFromLine(line+1)));
-				
+				if (getConditionFromLine(line).startsWith("While")){
+					istant.evaluateCondition(new Condition(getConditionFromLine(line+1)), 
+							new Action(getActionFromLine(line+1), getGuardsFromLine(line+1)));
+					line ++; 
+					istant.evaluateCondition(new Condition(getConditionFromLine(line+1)), 
+							new Action(getActionFromLine(line+1), getGuardsFromLine(line+1)));	
+				} else{ 
+					istant.evaluateCondition(new Condition(getConditionFromLine(line+1)), 
+							new Action(getActionFromLine(line+1), getGuardsFromLine(line+1)));
+				}
 			}
 		}
 		br.close();
 		return istant; 
-		
+
+
 	}
 
 	private String getStateFromLine(int i) throws FileNotFoundException{
@@ -228,7 +236,7 @@ public class Strategy {
 			action.concat(line); 
 			line = sf.lineAtNumber(this.strategy, i);
 			i++; 
-		} while (!line.contains("{")); 
+		} while (!line.contains("}")); 
 
 		return action.substring(action.indexOf("take transition"), action.indexOf('{')+1);
 

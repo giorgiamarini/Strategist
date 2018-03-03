@@ -6,17 +6,17 @@ import java.util.Set;
 
 import Action.Action;
 import Clock.ClockControl;
-import Message.DispatchMessage;
-import Message.FailureMessage;
-import Message.Message;
-import Message.WaitMessage;
 import StateVariables.StateVariables;
 import ThingsThatMustBeVerified.Condition;
+import it.istc.pst.platinum.executive.dc.DCResult;
+import it.istc.pst.platinum.executive.dc.DispatchDCResult;
+import it.istc.pst.platinum.executive.dc.FailureDCResult;
+import it.istc.pst.platinum.executive.dc.WaitDCResult;
 
 public class PlanStatus {
 	private StateVariables stateVariablesValue; 
 	private ClockControl clocks; 
-	private Message message; 
+	private DCResult message; 
 
 	public PlanStatus(ClockControl clocks, Set<String> sv){
 		this.clocks = clocks; 
@@ -51,24 +51,24 @@ public class PlanStatus {
 				if (tokensToDispatch.get(a).isEmpty())
 					tokensToDispatch.remove(a);
 			}
-			this.message = new DispatchMessage("Dispatch", tokensToDispatch.values());
+			this.message = new DispatchDCResult(tokensToDispatch);
 
 		} else { 
 			if (condition.getCondition().startsWith("While")){ 
 				if (!condition.isVerified(this.clocks)){
-					this.message = new WaitMessage("Wait until", condition.getPlanClock());
+					this.message = new WaitDCResult(condition.getPlanClock());
 
 				}
 			}
 		}
-		this.message = new FailureMessage("Impasse!");
+		this.message = new FailureDCResult();
 	}
 
 	public StateVariables getStateVariablesValues(){
 		return this.stateVariablesValue; 
 	}
 
-	public Message getMessage(){
+	public DCResult getMessage(){
 		return this.message; 
 	}
 

@@ -14,10 +14,11 @@ public class NewValues {
 	
 	/*The method creates a new set of values that must substitute the actual values in the clocks.*/
 	private void createSet(String newVal){
-		String a = newValue.substring(newValue.indexOf("tau"+4)).trim(); 
+		String a = newVal.substring(newVal.indexOf("tau"+4)).trim(); 
 		if (newValue.equals("1")){
 			this.newValues = null;
 		} else {
+			a = a.substring(0, a.indexOf("}"));
 			this.newValues = new HashSet<String>(); 
 			this.newValues.add(a.substring(0, a.indexOf(",")-1).trim()); 
 			a = a.substring(a.indexOf(",")+1);

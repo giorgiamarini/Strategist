@@ -12,7 +12,7 @@ import StringFinder.StringFinder;
 public class CreatingTheStrategy {
 	private Strategy strategy;  
 
-	public void creatingStrategy() throws IOException, InterruptedException{
+	public void creatingStrategy() throws Exception{
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String path = scanner.nextLine(); 
@@ -21,7 +21,7 @@ public class CreatingTheStrategy {
 	
 	
 	/*this method create the file strategy if the input file has .xta extension.*/
-	public Strategy createStrategy(String fileName) throws IOException, InterruptedException{
+	public Strategy createStrategy(String fileName) throws Exception{
 		if (okExtension(fileName, ".xta")){ 
 			this.strategy = new Strategy(verifytga(fileName), getHorizon(fileName), new Relations(FileSystems.getDefault().getPath(fileName).toFile()));
 			return this.strategy;

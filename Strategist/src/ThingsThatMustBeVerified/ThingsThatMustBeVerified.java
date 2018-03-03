@@ -30,11 +30,21 @@ public abstract class ThingsThatMustBeVerified {
 		for (String c : this.conditions){
 			if (c.contains(clock.getClockName())){
 				switch(symbols(c)){
-				case ">": verified = clock.getTime() > Integer.parseInt(numbers(c, c.indexOf(">")+1));
-				case ">=": verified = clock.getTime() >= Integer.parseInt(numbers(c, c.indexOf(">=")+2)); 
-				case "==": verified = clock.getTime() == Integer.parseInt(numbers(c, c.indexOf("==")+2));
-				case "<": verified = clock.getTime() < Integer.parseInt(numbers(c, c.indexOf("<")+1));
-				case "<=": verified = clock.getTime() <= Integer.parseInt(numbers(c, c.indexOf(">")+2));
+				case ">": {
+					verified = clock.getTime() > Integer.parseInt(numbers(c, c.indexOf(">")+1));} 
+				break; 
+				case ">=": {
+					verified = clock.getTime() >= Integer.parseInt(numbers(c, c.indexOf(">=")+2));} 
+				break; 
+				case "==": {
+					verified = clock.getTime() == Integer.parseInt(numbers(c, c.indexOf("==")+2));} 
+				break; 
+				case "<": {
+					verified = clock.getTime() < Integer.parseInt(numbers(c, c.indexOf("<")+1));} 
+				break; 
+				case "<=": {
+					verified = clock.getTime() <= Integer.parseInt(numbers(c, c.indexOf(">")+2));} 
+				break; 
 				}
 			}
 		}
