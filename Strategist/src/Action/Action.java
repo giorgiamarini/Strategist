@@ -2,7 +2,7 @@ package Action;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Set;
 
 import Clock.ClockControl;
 import Clock.NewValues;
@@ -20,48 +20,44 @@ public class Action {
 	private NewValues newValues;
 	
 /*This constructor takes a string, taken from the terminal output, and create the object Action.*/	
-	public Action(String actionFromLine, String conditions) {
+	public Action(String actionFromLine, String conditions, Set<String> variables) {
 		this.initialStates = new HashMap<String, String>();
 		this.finalStates = new HashMap<String, String>(); 
 		
 		actionFromLine = actionFromLine.trim(); 
-		String a, b = ""; 
 		
 		while(!actionFromLine.isEmpty()){
-			if (!actionFromLine.contains("->")){
-				this.finalStates.put(actionFromLine.substring(0, actionFromLine.indexOf('.')), 
-						actionFromLine.substring(actionFromLine.indexOf('.'), actionFromLine.length())); 
-				actionFromLine = actionFromLine.trim(); 
-
-			}
-			else {
-				if(!actionFromLine.startsWith("->")){
-					a = actionFromLine.substring(3, actionFromLine.indexOf(".")); 
-					b = actionFromLine.substring(actionFromLine.indexOf(".")+1, actionFromLine.indexOf('-'));
-					this.initialStates.put(a, b); 
-				} else {
-					a = actionFromLine.substring(0, actionFromLine.indexOf(".")); 
-					b = actionFromLine.substring(actionFromLine.indexOf(".")+1, actionFromLine.indexOf(' '));
-					this.finalStates.put(a, b); 
-				}
-					actionFromLine = actionFromLine.substring(a.concat(b).length()+2);
-					actionFromLine = actionFromLine.trim(); 
-
-				}
+			String alfa = actionFromLine.substring(0, actionFromLine.indexOf(" ")); 
 			
+			this.initialStates.put(alfa.substring(0, alfa.indexOf(".")), 
+					alfa.substring(alfa.indexOf(".")+1, alfa.indexOf("-")));
+			
+			String beta = alfa.substring(alfa.indexOf(">"+1)); 
+			this.finalStates.put(beta.substring(0, beta.indexOf(".")), 
+					beta.substring(beta.indexOf(".")+1).trim());
+			actionFromLine = actionFromLine.replace(alfa, "").trim(); 
+			}
+		
+			for(String s: variables){
+				if (!this.initialStates.containsKey(s) && !this.finalStates.containsKey(s)){
+					this.initialStates.put(s, "");
+					this.finalStates.put(s, ""); 
+				}
+			}
+		
 			this.guards = new Guards(conditions.substring(0, conditions.indexOf("tau"))); 
 			this.newValues = new NewValues(conditions.substring(conditions.indexOf("tau")));
-
-		}
 	}
 
 	/*This method change the value of the state variable value in the state.*/
-	public void takeTransition(StateVariables state, ClockControl clock) {
-		if (this.guards.isVerified(clock))
+	public StateVariables takeTransition(StateVariables state, ClockControl clock) {
+		if (this.guards.isVerified(clock)){
 			for(String actualState : state.getStateVariables().keySet())
-				if (actualState == this.initialStates.get(actualState))
+				if (this.initialStates.get(actualState)!="")
 					state.insertStateVariableValue(actualState, this.finalStates.get(actualState));
-					
+		}			
+	
+		return state; 
 	}
 
 	public Map<String, String> getInitialStates(){

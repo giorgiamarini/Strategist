@@ -34,15 +34,39 @@ public class ClockControl {
 				for (String v : values.getNewValues())
 					if (v.contains(c.getClockName())){
 						if (v.contains("H")){
-							c.setTime(horizon);
+							setTimeRelatedToHorizon(c, v);
 						}
 						else 
-							c.setTime(Integer.parseInt(v.substring(v.indexOf("=")+1, v.indexOf(",")).trim()));
+							c.setTime(0);
 					}
 			}
 		}
 	}
 
+	private void setTimeRelatedToHorizon(Clock c, String newValue){
+			if (newValue.contains(c.getClockName())){
+				String a = newValue.substring(newValue.indexOf("=")+1).trim();
+				if (a.equals("H")) c.setTime(this.horizon);
+				else {
+					c.setTime(this.horizon + Integer.parseInt(numbers(a, a.indexOf("H"))));
+				}
+		}
+	}
+	
+	private String numbers(String c, int i){
+		String a = "";
+		while (i<c.length() && isNumber(c.charAt(i))){
+				a = a + c.charAt(i); 
+				i++; 
+		}
+		return a; 
+	}
+	
+	private boolean isNumber(char charAt) {
+		return charAt=='0'||charAt=='1'||charAt=='2'||charAt=='3'||charAt=='4'||charAt=='5'
+				|| charAt=='6'||charAt=='7'||charAt=='8'||charAt=='9';
+	}
+	
 	public Clock getPlanClock(){
 		Clock c = null; 
 		for (Clock a : this.clocks)

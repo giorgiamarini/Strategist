@@ -163,19 +163,19 @@ public class Strategy {
 		BufferedReader br = new BufferedReader(new FileReader(this.strategy));
 		String strLine;
 		int line = 0; 
-
+		Set<String> stateVariables = this.stateVariables();
 		while ((strLine = br.readLine())!= null) {
 			line++; 
 			if (strLine.startsWith("State") && istant.getStateVariablesValues().isState(getStateFromLine(line))){
 				if (getConditionFromLine(line).startsWith("While")){
 					istant.evaluateCondition(new Condition(getConditionFromLine(line+1)), 
-							new Action(getActionFromLine(line+1), getGuardsFromLine(line+1)));
+							new Action(getActionFromLine(line+1), getGuardsFromLine(line+1), stateVariables));
 					line ++; 
 					istant.evaluateCondition(new Condition(getConditionFromLine(line+1)), 
-							new Action(getActionFromLine(line+1), getGuardsFromLine(line+1)));	
+							new Action(getActionFromLine(line+1), getGuardsFromLine(line+1), stateVariables));	
 				} else{ 
 					istant.evaluateCondition(new Condition(getConditionFromLine(line+1)), 
-							new Action(getActionFromLine(line+1), getGuardsFromLine(line+1)));
+							new Action(getActionFromLine(line+1), getGuardsFromLine(line+1), stateVariables));
 				}
 			}
 		}

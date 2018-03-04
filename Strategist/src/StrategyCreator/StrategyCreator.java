@@ -31,7 +31,7 @@ public class StrategyCreator {
 /*The method verifytga call the instruction  verifytga on the terminal and save the output in a file.*/
 	private static File verifytga(String fileName) throws IOException, InterruptedException {
 		JavaRunCommand jav = new JavaRunCommand();
-		File output = jav.runCommandVTGA(fileName, new File("strategy.txt"));
+		File output = jav.runCommandVTGA(fileName);
 		return output; 
 	}
 

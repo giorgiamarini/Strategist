@@ -42,7 +42,10 @@ public class PlanStatus {
 
 
 	public void evaluateCondition(Condition condition, Action action) throws Exception{
-		if (condition.getCondition().startsWith("When") && condition.isVerified(this.clocks)){
+		if (condition.getCondition().startsWith("When")){
+			while (!condition.isVerified(this.clocks)){
+				;
+				
 			transition(condition, action);
 
 			Map<String, String> tokensToDispatch = new HashMap<String,String>(); 
@@ -51,8 +54,10 @@ public class PlanStatus {
 				if (tokensToDispatch.get(a).isEmpty())
 					tokensToDispatch.remove(a);
 			}
+			
 			this.message = new DispatchDCResult(tokensToDispatch);
-
+			}
+			
 		} else { 
 			if (condition.getCondition().startsWith("While")){ 
 				if (!condition.isVerified(this.clocks)){
