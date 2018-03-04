@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Set;
 
 import Action.Action;
+import Check.Condition;
 import Clock.ClockControl;
 import StateVariables.StateVariables;
-import ThingsThatMustBeVerified.Condition;
 import it.istc.pst.platinum.executive.dc.DCResult;
 import it.istc.pst.platinum.executive.dc.DispatchDCResult;
 import it.istc.pst.platinum.executive.dc.FailureDCResult;

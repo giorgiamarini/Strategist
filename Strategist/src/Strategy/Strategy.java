@@ -9,11 +9,11 @@ import java.util.Scanner;
 import java.util.Set;
 
 import Action.Action;
+import Check.Condition;
 import PlanStatus.PlanStatus;
 import Relations.Relations;
 import StateVariables.StateVariables;
 import StringFinder.StringFinder;
-import ThingsThatMustBeVerified.Condition;
 
 public class Strategy {
 	private File strategy;

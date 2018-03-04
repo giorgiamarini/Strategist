@@ -28,7 +28,7 @@ public class StateVariables {
 	public void updateState(String state){
 		String a = state; 
 		for (String key : this.stateVariablesValues.keySet()){
-			String s = a.substring(state.indexOf(key.concat("")));
+			String s = a.substring(state.indexOf(key.length()+1));
 			s = s.substring(0, s.indexOf(" "));
 			insertStateVariableValue(key, s); 
 			

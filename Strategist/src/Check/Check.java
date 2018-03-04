@@ -1,55 +1,21 @@
-package ThingsThatMustBeVerified;
+package Check;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import Clock.Clock;
 import Clock.ClockControl;
 
-public abstract class ThingsThatMustBeVerified {
+public abstract class Check {
 	protected String condition; 
 	protected Set<String> conditions; 
 	
-	public ThingsThatMustBeVerified(String condition){
+	public Check(String condition){
 		this.condition = condition; 
 		this.conditions = new HashSet<String>();
 	}
 	
 	/*This method controls if the set of conditions is verified on the plan.*/
-	public boolean isVerified(ClockControl clock){
-		boolean verified = true;
-		for (Clock c : clock.getClocks()){
-			verified = verified && verify(c); 
-		}
-		return verified; 
-	}
-	
-	
-	private boolean verify(Clock clock) {
-		boolean verified = false; 
-		for (String c : this.conditions){
-			if (c.contains(clock.getClockName())){
-				switch(symbols(c)){
-				case ">": {
-					verified = clock.getTime() > Integer.parseInt(numbers(c, c.indexOf(">")+1));} 
-				break; 
-				case ">=": {
-					verified = clock.getTime() >= Integer.parseInt(numbers(c, c.indexOf(">=")+2));} 
-				break; 
-				case "==": {
-					verified = clock.getTime() == Integer.parseInt(numbers(c, c.indexOf("==")+2));} 
-				break; 
-				case "<": {
-					verified = clock.getTime() < Integer.parseInt(numbers(c, c.indexOf("<")+1));} 
-				break; 
-				case "<=": {
-					verified = clock.getTime() <= Integer.parseInt(numbers(c, c.indexOf(">")+2));} 
-				break; 
-				}
-			}
-		}
-		return verified; 
-	}
+	public abstract boolean isVerified(ClockControl clock);
 
 	protected void adjust(){
 		for (String c : this.conditions){
@@ -63,7 +29,7 @@ public abstract class ThingsThatMustBeVerified {
 		}
 	}
 	
-	private String symbols(String c){
+	protected String symbols(String c){
 		if (c.contains("<")){
 			if (c.contains("<="))
 				return "<=";
@@ -87,7 +53,7 @@ public abstract class ThingsThatMustBeVerified {
 				|| charAt=='6'||charAt=='7'||charAt=='8'||charAt=='9';
 	}
 
-	private boolean startsWithANumber(String c){
+	protected boolean startsWithANumber(String c){
 		return c.startsWith("0") || c.startsWith("1") || c.startsWith("2") || 
 				c.startsWith("3") || c.startsWith("4")|| c.startsWith("5") || 
 				c.startsWith("6") || c.startsWith("7") || c.startsWith("8") || 

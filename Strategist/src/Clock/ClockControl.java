@@ -86,6 +86,14 @@ public class ClockControl {
 		}
 	}
 	
+	public Clock getClockWithName(String name){
+		Clock a = null; 
+		for (Clock c : this.clocks){
+			if (c.getClockName().equals(name)) a = c;
+		}
+		return a; 
+	}
+	
 	public void subtractToClocks(long u){
 		for(Clock c : this.clocks){
 			c.setTime(c.getTime()-u);

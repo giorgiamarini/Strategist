@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import Check.Guards;
 import Clock.ClockControl;
 import Clock.NewValues;
 import StateVariables.StateVariables;
-import ThingsThatMustBeVerified.Guards;
 
 public class Action {
 
